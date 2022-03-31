@@ -82,6 +82,7 @@ open class WCClient (
     var onBnbTxConfirm: (id: Long, order: WCBinanceTxConfirmParam) -> Unit = { _, _ -> Unit }
     var onGetAccounts: (id: Long) -> Unit = { _ -> Unit }
     var onSignTransaction: (id: Long, transaction: WCSignTransaction) -> Unit = {_, _ -> Unit }
+    var onKeplrSignTransaction: (id: Long, transaction: WCSignTransaction) -> Unit = {_, _ -> Unit }
 
     override fun onOpen(webSocket: WebSocket, response: Response) {
         Log.d(TAG, "<< websocket opened >>")
@@ -335,7 +336,7 @@ open class WCClient (
             WCMethod.KEPLR_SIGN_TRANSACTION -> {
                 val param = gson.fromJson<List<WCSignTransaction>>(request.params)
                     .firstOrNull() ?: throw InvalidJsonRpcParamsException(request.id)
-                onSignTransaction(request.id, param)
+                onKeplrSignTransaction(request.id, param)
             }
         }
     }
