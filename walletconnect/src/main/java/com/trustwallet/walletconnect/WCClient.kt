@@ -332,6 +332,11 @@ open class WCClient (
                     .firstOrNull() ?: throw InvalidJsonRpcParamsException(request.id)
                 onSignTransaction(request.id, param)
             }
+            WCMethod.KEPLR_SIGN_TRANSACTION -> {
+                val param = gson.fromJson<List<WCSignTransaction>>(request.params)
+                    .firstOrNull() ?: throw InvalidJsonRpcParamsException(request.id)
+                onSignTransaction(request.id, param)
+            }
         }
     }
     
