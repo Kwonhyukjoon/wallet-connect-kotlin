@@ -1,4 +1,4 @@
-package com.trustwallet.walletconnect.models.keplr
+package com.trustwallet.walletconnect.models.session
 
 data class WCKeplrWallet (
     val name: String,
